@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CostaLegal — Estudio Jurídico Inmobiliario Pichilemu</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (Serif Elegante) & Inter (Sans-Serif Moderna) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config Customization -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navyDark: '#071221',       /* Azul marino profundo casi negro */
+                        navyLight: '#0E1E33',      /* Azul marino un poco más claro para componentes */
+                        goldMuted: '#C39B78',      /* Crema / Dorado apagado sofisticado */
+                        goldHover: '#B28A67',      /* Dorado en hover */
+                        creamBg: '#F9F6F0',        /* Fondo crema cálido premium */
+                        charcoal: '#1E252E',       /* Gris oscuro para textos principales en fondo claro */
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .serif-italic {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+        }
+        /* Transición suave para header */
+        .header-scrolled {
+            background-color: rgba(7, 18, 33, 0.95);
+            backdrop-filter: blur(12px);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans bg-[#071221] text-white overflow-x-hidden antialiased selection:bg-goldMuted selection:text-navyDark">
+
+<!-- NAVIGATION -->
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 lg:px-16 border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="flex flex-col group">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-xl tracking-[0.2em] text-white font-medium transition-colors group-hover:text-goldMuted">COSTA LEGAL</span>
+            </div>
+            <span class="text-[8px] tracking-[0.3em] text-goldMuted font-sans uppercase font-medium mt-0.5">Estudio Jurídico Inmobiliario</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex items-center space-x-10 text-xs tracking-[0.2em] uppercase font-semibold text-white/70">
+            <a href="#servicios" class="hover:text-goldMuted transition-colors duration-300">Servicios</a>
+            <a href="#sobre-mi" class="hover:text-goldMuted transition-colors duration-300">La Firma</a>
+            <a href="#proceso" class="hover:text-goldMuted transition-colors duration-300">Proceso</a>
+            <a href="#contacto" class="hover:text-goldMuted transition-colors duration-300">Contacto</a>
+        </nav>
+
+        <!-- CTA Action Desktop (Strictly WhatsApp) -->
+        <div class="hidden lg:flex items-center gap-6">
+            <a href="https://wa.me/56937632917?text=Hola%20Fernando,%20necesito%20asesor%C3%ADa%20para%20un%20estudio%20de%20t%C3%ADtulos%20en%20la%20costa." 
+               target="_blank" 
+               class="border border-goldMuted hover:bg-goldMuted hover:text-navyDark text-goldMuted text-[11px] font-bold tracking-[0.2em] uppercase px-5 py-2.5 rounded transition-all duration-300">
+                Hablar por WhatsApp
+            </a>
+        </div>
+
+        <!-- Mobile Menu Trigger -->
+        <button onclick="toggleMobileMenu()" class="md:hidden text-white hover:text-goldMuted focus:outline-none" aria-label="Abrir Menú">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+    </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobile-menu" class="fixed inset-0 bg-navyDark/98 z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center p-8 md:hidden">
+    <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white hover:text-goldMuted" aria-label="Cerrar Menú">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    <nav class="flex flex-col space-y-8 text-center text-sm tracking-[0.25em] uppercase font-semibold text-white/80">
+        <a href="#servicios" onclick="toggleMobileMenu()" class="hover:text-goldMuted transition-colors">Servicios</a>
+        <a href="#sobre-mi" onclick="toggleMobileMenu()" class="hover:text-goldMuted transition-colors">La Firma</a>
+        <a href="#proceso" onclick="toggleMobileMenu()" class="hover:text-goldMuted transition-colors">Proceso</a>
+        <a href="#contacto" onclick="toggleMobileMenu()" class="hover:text-goldMuted transition-colors">Contacto</a>
+    </nav>
+    <div class="mt-12 flex flex-col gap-4 w-full max-w-xs">
+        <a href="https://wa.me/56937632917?text=Hola%20Fernando,%20necesito%20asesor%C3%ADa%20para%20un%20estudio%20de%20t%C3%ADtulos%20en%20la%20costa." 
+           target="_blank" 
+           class="w-full bg-goldMuted hover:bg-goldHover text-navyDark text-xs font-bold tracking-[0.2em] uppercase py-4 rounded text-center transition-all duration-300 block">
+            Hablar por WhatsApp
+        </a>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 lg:px-16 overflow-hidden">
+    <!-- Punta de Lobos Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" 
+             alt="Costa de Punta de Lobos, Pichilemu" 
+             class="w-full h-full object-cover filter brightness-[0.25] contrast-[1.05]"
+             onerror="this.src='https://placehold.co/1920x1080/071221/ffffff?text=Punta+de+Lobos+Pichilemu'">
+        <!-- Navy Gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-navyDark via-transparent to-navyDark/90"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-5xl mx-auto text-center mt-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 border border-white/10 mb-8">
+            <span class="w-1.5 h-1.5 rounded-full bg-goldMuted"></span>
+            <span class="text-[10px] uppercase tracking-[0.3em] text-white/80 font-semibold">COSTA LEGAL · PICHILEMU & CAHUIL</span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-light tracking-tight leading-[1.15] mb-6 max-w-4xl mx-auto">
+            Seguridad jurídica para invertir con <span class="serif-italic text-goldMuted">confianza</span>.
+        </h1>
+
+        <p class="font-sans text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+            Estudios de títulos, Due Diligence inmobiliaria y asesoría legal especializada para proteger tus inversiones en Pichilemu, Cahuil y la zona costera de O'Higgins.
+        </p>
+
+        <!-- Only Direct WhatsApp CTA -->
+        <div class="flex justify-center items-center">
+            <a href="https://wa.me/56937632917?text=Hola%20Fernando,%20necesito%20asesor%C3%ADa%20para%20un%20estudio%20de%20t%C3%ADtulos%20en%20la%20costa." 
+               target="_blank" 
+               class="inline-flex items-center gap-3 bg-goldMuted hover:bg-goldHover text-navyDark text-xs font-bold tracking-[0.25em] uppercase px-10 py-5 rounded shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                <!-- WhatsApp Icon -->
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.6.95 3.197 1.45 4.823 1.452 5.53 0 10.028-4.5 10.031-10.03.001-2.678-1.04-5.196-2.933-7.091C16.674 1.588 14.16 1.04 11.48 1.04 5.952 1.04 1.454 5.538 1.452 11.07c-.001 1.63.452 3.223 1.312 4.673L1.751 21.8l6.113-1.605c1.472.802 3.103 1.22 4.783 1.223zM18.06 14.75c-.33-.165-1.937-.954-2.235-1.063-.297-.11-.514-.165-.73.165-.215.33-.836 1.063-1.025 1.282-.19.215-.377.243-.707.08-.33-.165-1.393-.513-2.653-1.638-.98-.874-1.64-1.953-1.832-2.28-.19-.33-.02-.507.144-.671.148-.148.33-.385.496-.578.165-.192.22-.33.33-.55.11-.22.05-.412-.025-.578-.075-.165-.73-1.76-.998-2.41-.263-.63-.53-.54-.73-.55-.19-.01-.41-.01-.628-.01-.22 0-.578.08-.88.412-.303.33-1.155 1.128-1.155 2.75 0 1.62 1.182 3.19 1.346 3.41.165.22 2.328 3.555 5.64 4.987.788.34 1.405.543 1.885.696.792.25 1.512.215 2.08.13.634-.094 1.938-.793 2.21-1.558.275-.765.275-1.422.193-1.558-.08-.135-.297-.215-.627-.38z"/>
+                </svg>
+                Escríbenos por WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- VALUE BAR -->
+<section class="bg-navyDark border-t border-b border-white/5 py-12 px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Col 1 -->
+            <div class="flex gap-4">
+                <div class="text-goldMuted flex-shrink-0 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.053.244-7.5 1.725V21" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-white mb-1">Especialización</h3>
+                    <p class="text-xs text-white/60 leading-relaxed font-light">Especialistas en derecho inmobiliario estratégico y due diligence.</p>
+                </div>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="flex gap-4">
+                <div class="text-goldMuted flex-shrink-0 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-white mb-1">Conocimiento Local</h3>
+                    <p class="text-xs text-white/60 leading-relaxed font-light">Dominamos el territorio, las notarías y los reguladores costeros.</p>
+                </div>
+            </div>
+
+            <!-- Col 3 -->
+            <div class="flex gap-4">
+                <div class="text-goldMuted flex-shrink-0 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-white mb-1">Enfoque Preventivo</h3>
+                    <p class="text-xs text-white/60 leading-relaxed font-light">Detectamos y neutralizamos riesgos antes de comprometer tus fondos.</p>
+                </div>
+            </div>
+
+            <!-- Col 4 -->
+            <div class="flex gap-4">
+                <div class="text-goldMuted flex-shrink-0 mt-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.97 5.97 0 00-.75-2.906m-13.93 3.47a3 3 0 004.682-2.72m-.94 3.197a12.11 12.11 0 01-.038-.667 11.962 11.962 0 013.223-8.105m4.079-4.079a3 3 0 11-5.714-2.13A3 3 0 0020 4.757a3 3 0 11-5.714 2.13c-.765-.765-1.78-1.242-2.9-1.242a3 3 0 00-2.83 4.018z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-white mb-1">Acompañamiento</h3>
+                    <p class="text-xs text-white/60 leading-relaxed font-light">Gestión técnica y contractual completa desde el acuerdo hasta el Conservador.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="servicios" class="bg-white text-charcoal py-24 px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+            <!-- Left Sticky Column -->
+            <div class="lg:col-span-5 lg:sticky lg:top-32 self-start">
+                <span class="text-xs uppercase tracking-[0.3em] text-goldMuted font-bold block mb-4">Servicios Inmobiliarios</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-navyDark font-light leading-[1.15] mb-6">
+                    Soluciones legales para cada etapa de tu inversión.
+                </h2>
+                <div class="w-16 h-[2px] bg-goldMuted mb-6"></div>
+                <p class="text-sm sm:text-base text-charcoal/70 leading-relaxed font-light mb-8 max-w-md">
+                    Protegemos transacciones agrícolas, parcelas de agrado y loteos urbanos. El análisis oportuno marca la diferencia entre un paraíso sustentable y un litigio interminable.
+                </p>
+                <a href="https://wa.me/56937632917?text=Hola%20Fernando,%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20detalles%20de%20los%20servicios%20legales%20inmobiliarios." 
+                   target="_blank" 
+                   class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-navyDark hover:text-goldMuted transition-all duration-300 group">
+                    Iniciar Consulta por WhatsApp
+                    <span class="text-goldMuted group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                </a>
+            </div>
+
+            <!-- Right Grid of Services -->
+            <div class="lg:col-span-7 space-y-12">
+                <!-- Serv 1 -->
+                <div class="group border-b border-navyDark/10 pb-10 transition-all duration-300">
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 rounded-lg bg-creamBg flex items-center justify-center text-goldMuted group-hover:bg-navyDark group-hover:text-white transition-all duration-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-serif text-xl sm:text-2xl text-navyDark font-medium mb-3 group-hover:text-goldMuted transition-colors duration-300">Estudio de Títulos</h3>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light mb-4">
+                                Revisión completa de la cadena de dominio por 30 años. Confirmamos que la propiedad esté totalmente saneada, descartando usufructos ocultos, derechos de herencia pendientes y vicios de origen.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serv 2 -->
+                <div class="group border-b border-navyDark/10 pb-10 transition-all duration-300">
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 rounded-lg bg-creamBg flex items-center justify-center text-goldMuted group-hover:bg-navyDark group-hover:text-white transition-all duration-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-serif text-xl sm:text-2xl text-navyDark font-medium mb-3 group-hover:text-goldMuted transition-colors duration-300">Due Diligence Inmobiliaria</h3>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light mb-4">
+                                Análisis legal y técnico exhaustivo. Evaluamos zonificaciones del SAG, restricciones de la DOM local, áreas de preservación (humedales/CONAF) y riesgos de abastecimiento de agua.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serv 3 -->
+                <div class="group pb-4 transition-all duration-300">
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 rounded-lg bg-creamBg flex items-center justify-center text-goldMuted group-hover:bg-navyDark group-hover:text-white transition-all duration-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-serif text-xl sm:text-2xl text-navyDark font-medium mb-3 group-hover:text-goldMuted transition-colors duration-300">Promesas & Compraventas</h3>
+                            <p class="text-sm text-charcoal/70 leading-relaxed font-light mb-4">
+                                Redacción a medida y blindaje técnico de contratos. Controlamos minuciosamente las condiciones de pago, multas penales de salida y las instrucciones notariales hasta la exitosa inscripción.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE MÍ / FIRMA -->
+<section id="sobre-mi" class="bg-navyDark text-white py-24 px-6 lg:px-16 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            
+            <!-- Real Lawyer Profile Photo -->
+            <div class="lg:col-span-5 relative group">
+                <div class="aspect-[4/5] w-full rounded-lg overflow-hidden bg-navyLight relative z-10 border border-white/10">
+                    <img src="fernando.munita.png" 
+                         alt="Fernando Munita Vidal - CostaLegal" 
+                         class="w-full h-full object-cover object-[center_30%] transition-transform duration-700"
+                         onerror="this.src='https://placehold.co/600x750/071221/ffffff?text=Fernando+Munita'">
+                    
+                    <div class="absolute inset-0 border-[8px] border-navyDark/30 pointer-events-none"></div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-6">
+                        <span class="text-xs uppercase tracking-[0.3em] text-[#F5F1E8] font-bold drop-shadow-md">Abogado Fundador</span>
+                        <h4 class="font-serif text-lg text-white font-medium mt-1 drop-shadow-lg">Fernando Munita Vidal</h4>
+                    </div>
+                </div>
+                <!-- Background decorative frame -->
+                <div class="absolute -bottom-4 -right-4 w-2/3 h-2/3 border border-goldMuted/30 rounded-lg -z-0"></div>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="lg:col-span-7">
+                <span class="text-xs uppercase tracking-[0.3em] text-goldMuted font-bold block mb-4">La Firma Boutique</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-white font-light leading-[1.15] mb-6">
+                    Experiencia internacional, visión global y <span class="serif-italic text-goldMuted">enfoque local</span>.
+                </h2>
+                <div class="w-16 h-[2px] bg-goldMuted mb-8"></div>
+                
+                <div class="space-y-6 text-sm sm:text-base text-white/80 font-light leading-relaxed">
+                    <p>
+                        Soy Fernando Munita, abogado con experiencia internacional y una visión global desarrollada a través de vivencias profesionales y personales en Francia y Australia. En CostaLegal combino esta perspectiva con un profundo conocimiento del mercado inmobiliario chileno para entregar asesoría jurídica especializada en estudios de títulos, due diligence y compraventa de bienes raíces, acompañando cada inversión con una mirada estratégica y protección legal.
+                    </p>
+                    
+                    <p>
+                        Además, cuento con una red de colaboradores especializados, incluyendo un arquitecto de Pichilemu con amplia trayectoria, a quien integro según las necesidades específicas de cada proyecto para complementar la asesoría jurídica con una visión técnica y multidisciplinaria.
+                    </p>
+                </div>
+
+                <!-- Strategic highlights boxes -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 mt-8 border-t border-white/10">
+                    <div class="p-5 rounded bg-navyLight/50 border border-white/5 hover:border-goldMuted/30 transition-all">
+                        <span class="text-[10px] tracking-[0.2em] font-semibold text-goldMuted block mb-2">FRANCIA & AUSTRALIA</span>
+                        <p class="text-xs text-white/70 leading-relaxed font-light">Vivencias y aprendizajes complementarios que enriquecen nuestra visión de análisis estratégico.</p>
+                    </div>
+                    <div class="p-5 rounded bg-navyLight/50 border border-white/5 hover:border-goldMuted/30 transition-all">
+                        <span class="text-[10px] tracking-[0.2em] font-semibold text-goldMuted block mb-2">APOYO MULTIDISCIPLINARIO</span>
+                        <p class="text-xs text-white/70 leading-relaxed font-light">Colaboración activa con un arquitecto local de vasta trayectoria en Pichilemu para resolver complejidades de terreno.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- NUESTRO PROCESO -->
+<section id="proceso" class="bg-navyDark/95 text-white py-24 px-6 lg:px-16 border-t border-b border-white/5">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-20">
+            <span class="text-xs uppercase tracking-[0.3em] text-goldMuted font-bold block mb-4">Metodología Preventiva</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-white font-light">Así trabajamos contigo</h2>
+            <div class="w-12 h-[2px] bg-goldMuted mx-auto mt-4"></div>
+        </div>
+
+        <!-- 5 Steps Flow -->
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 relative">
+            <!-- Step 1 -->
+            <div class="relative group">
+                <div class="text-5xl font-serif text-goldMuted/20 group-hover:text-goldMuted transition-colors duration-500 font-light mb-4">01</div>
+                <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-white mb-2">Conversamos</h3>
+                <p class="text-xs text-white/60 leading-relaxed font-light">Entendemos tu caso particular, evaluamos tus objetivos inmediatos y recopilamos la propuesta de terreno.</p>
+                <div class="hidden lg:block absolute top-[28px] left-[70px] w-[calc(100%-40px)] h-[1px] bg-white/10 z-0"></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative group">
+                <div class="text-5xl font-serif text-goldMuted/20 group-hover:text-goldMuted transition-colors duration-500 font-light mb-4">02</div>
+                <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-white mb-2">Analizamos</h3>
+                <p class="text-xs text-white/60 leading-relaxed font-light">Revisamos en detalle toda la información registral, planos e inscripciones en las bases costeras.</p>
+                <div class="hidden lg:block absolute top-[28px] left-[70px] w-[calc(100%-40px)] h-[1px] bg-white/10 z-0"></div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative group">
+                <div class="text-5xl font-serif text-goldMuted/20 group-hover:text-goldMuted transition-colors duration-500 font-light mb-4">03</div>
+                <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-white mb-2">Evaluamos riesgos</h3>
+                <p class="text-xs text-white/60 leading-relaxed font-light">Identificamos debilidades hídricas, zonificaciones restrictivas o gravámenes no declarados por el vendedor.</p>
+                <div class="hidden lg:block absolute top-[28px] left-[70px] w-[calc(100%-40px)] h-[1px] bg-white/10 z-0"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative group">
+                <div class="text-5xl font-serif text-goldMuted/20 group-hover:text-goldMuted transition-colors duration-500 font-light mb-4">04</div>
+                <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-white mb-2">Te asesoramos</h3>
+                <p class="text-xs text-white/60 leading-relaxed font-light">Entregamos un informe ejecutivo de viabilidad en formato simple con conclusiones categóricas del abogado.</p>
+                <div class="hidden lg:block absolute top-[28px] left-[70px] w-[calc(100%-40px)] h-[1px] bg-white/10 z-0"></div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="relative group">
+                <div class="text-5xl font-serif text-goldMuted/20 group-hover:text-goldMuted transition-colors duration-500 font-light mb-4">05</div>
+                <h3 class="text-xs uppercase tracking-[0.2em] font-bold text-white mb-2">Acompañamos</h3>
+                <p class="text-xs text-white/60 leading-relaxed font-light">Redactamos los contratos definitivos y guiamos la inscripción final limpia en el Conservador de Bienes Raíces.</p>
+            </div>
+        </div>
+
+        <!-- Single WhatsApp CTA inside Process -->
+        <div class="text-center mt-16">
+            <a href="https://wa.me/56937632917?text=Hola%20Fernando,%20me%20gustar%C3%ADa%20iniciar%20el%20proceso%20de%20asesor%C3%ADa%20legal%20inmobiliaria%20para%20un%20terreno." 
+               target="_blank" 
+               class="inline-block bg-[#0E1E33] hover:bg-[#142944] text-goldMuted border border-goldMuted/30 text-xs font-bold tracking-[0.2em] uppercase px-10 py-5 rounded transition-all duration-300">
+                Iniciar Asesoría por WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER & CLOSING -->
+<footer id="contacto" class="bg-[#050c17] text-white pt-24 pb-12 px-6 lg:px-16 border-t border-white/5 relative">
+    
+    <!-- Top Call to Action Frame -->
+    <div class="max-w-4xl mx-auto text-center mb-20 relative z-10">
+        <span class="text-xs uppercase tracking-[0.3em] text-goldMuted font-bold block mb-4">ESTUDIO JURÍDICO INMOBILIARIO</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-light leading-tight mb-8">
+            Invierte con certezas, no con suposiciones.
+        </h2>
+        
+        <!-- Only Clean WhatsApp Action -->
+        <div class="flex justify-center items-center">
+            <a href="https://wa.me/56937632917?text=Hola%20Fernando,%20necesito%20agendar%20una%20reuni%C3%B3n%20diagn%C3%B3stica%20para%20un%20terreno%20en%20la%20costa." 
+               target="_blank" 
+               class="inline-flex items-center gap-3 bg-goldMuted hover:bg-goldHover text-navyDark text-xs font-bold tracking-[0.2em] uppercase px-10 py-5 rounded transition-colors duration-300">
+                <span>Agendar Reunión por WhatsApp (+56 9 3763 2917)</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Footer Columns -->
+    <div class="max-w-7xl mx-auto pt-16 border-t border-white/10 flex flex-col lg:flex-row justify-between items-start gap-12 text-xs text-white/50">
+        <!-- Brand Info -->
+        <div class="flex flex-col max-w-sm">
+            <span class="font-serif text-lg tracking-[0.2em] text-white font-medium">COSTA LEGAL</span>
+            <span class="text-[8px] tracking-[0.3em] text-goldMuted uppercase font-medium mt-1">Estudio Jurídico Inmobiliario</span>
+            <p class="mt-4 leading-relaxed font-light">
+                Asesoría estratégica y legal especializada en transacciones inmobiliarias costeras. Pichilemu, Región del Libertador General Bernardo O'Higgins, Chile.
+            </p>
+        </div>
+
+        <!-- Clean Navigation Links -->
+        <div class="flex flex-wrap gap-x-12 gap-y-6">
+            <div class="flex flex-col space-y-3">
+                <span class="text-white uppercase tracking-[0.2em] font-semibold text-[10px]">Navegación</span>
+                <a href="#servicios" class="hover:text-goldMuted transition-colors font-light">Servicios</a>
+                <a href="#sobre-mi" class="hover:text-goldMuted transition-colors font-light">La Firma</a>
+                <a href="#proceso" class="hover:text-goldMuted transition-colors font-light">Proceso</a>
+            </div>
+            <div class="flex flex-col space-y-3">
+                <span class="text-white uppercase tracking-[0.2em] font-semibold text-[10px]">Atención</span>
+                <span class="font-light">Lunes a Viernes</span>
+                <span class="font-light">09:00 - 18:30 hrs</span>
+                <a href="mailto:contacto@costalegal.cl" class="hover:text-goldMuted transition-colors font-light">contacto@costalegal.cl</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright and Credentials -->
+    <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/40 font-light">
+        <p>&copy; 2026 CostaLegal Abogados. Todos los derechos reservados.</p>
+        <div class="flex gap-6 uppercase tracking-wider">
+            <a href="#" class="hover:text-white transition-colors">Términos de Servicio</a>
+            <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Header Scroll behavior
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
+    });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('translate-x-full')) {
+            menu.classList.remove('translate-x-full');
+            menu.classList.add('translate-x-0');
+        } else {
+            menu.classList.remove('translate-x-0');
+            menu.classList.add('translate-x-full');
+        }
+    }
+</script>
+</body>
+</html>
